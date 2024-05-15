@@ -9,10 +9,7 @@ import { Stack } from 'expo-router'
 import * as SplashScreen from 'expo-splash-screen'
 import { useEffect, useState } from 'react'
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
-import { CONTENFUL_SPACE_ID, CONTENTFUL_KEY } from '@env'
 import Loader from '@/components/Loader'
-import { persistCache } from 'apollo3-cache-persist'
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useColorScheme } from '@/components/useColorScheme'
 
 const cache = new InMemoryCache()
@@ -44,8 +41,6 @@ export default function RootLayout() {
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
     ...FontAwesome.font,
   })
-
-  const [loadingCache, setLoadingCache] = useState(true)
 
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {
