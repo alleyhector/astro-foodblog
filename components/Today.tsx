@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { View, Text, Image, StyleSheet, ScrollView } from 'react-native'
 import { Link } from 'expo-router'
 import { gql, useQuery } from '@apollo/client'
@@ -47,9 +47,6 @@ const Today = () => {
       month: 'short',
       day: 'numeric',
     })
-  }
-  if (post) {
-    console.log('POST: ', post.slug)
   }
 
   return (

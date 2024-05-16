@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
-import { View, Text, Image, StyleSheet } from 'react-native'
+import React from 'react'
+import { View, Text, Image, StyleSheet, ScrollView } from 'react-native'
 import { useGlobalSearchParams, useLocalSearchParams } from 'expo-router'
 import { gql, useQuery } from '@apollo/client'
 import Loader from '@/components/Loader'
+import Markdown from 'react-native-markdown-display'
 
 const QUERY_POST = gql`
   query blogPost($slug: String) {
@@ -15,6 +16,7 @@ const QUERY_POST = gql`
         }
         publishDate
         description
+        body
         heroImage {
           url
         }
@@ -34,21 +36,26 @@ const PostDetails = () => {
   if (!loading) {
     post = data?.blogPostCollection?.items[0]
   }
-  console.log('SLUG: ', slug)
-  console.log('POST: ', post)
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       {loading ? (
         <Loader />
       ) : (
-        <>
-          <Text style={styles.title}>Postdetails page</Text>
-          <Text style={styles.text}>{post.title}</Text>
-          <Text style={styles.text}>{slug}</Text>
-        </>
+        <View style={styles.container}>
+          {post.heroImage && (
+            <Image
+              style={{ width: 300, height: 300 }}
+              source={{ uri: post.heroImage.url }}
+            />
+          )}
+          <Markdown style={styles}>
+            {post?.description ? post.description : ''}
+          </Markdown>
+          <Markdown>{post?.body ? post.body : ''}</Markdown>
+        </View>
       )}
-    </View>
+    </ScrollView>
   )
 }
 
@@ -57,7 +64,7 @@ export default PostDetails
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 24,
+    padding: 10,
   },
   main: {
     flex: 1,

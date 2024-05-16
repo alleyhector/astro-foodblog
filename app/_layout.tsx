@@ -7,7 +7,7 @@ import {
 import { useFonts } from 'expo-font'
 import { Stack } from 'expo-router'
 import * as SplashScreen from 'expo-splash-screen'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 import Loader from '@/components/Loader'
 import { useColorScheme } from '@/components/useColorScheme'
@@ -67,7 +67,10 @@ function RootLayoutNav() {
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <ApolloProvider client={client}>
         <Stack>
-          <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
+          <Stack.Screen
+            name='(tabs)'
+            options={{ headerShown: false, title: 'Back' }}
+          />
           <Stack.Screen name='[slug]' options={{ title: 'Post Details' }} />
         </Stack>
       </ApolloProvider>
