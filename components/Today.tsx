@@ -1,8 +1,16 @@
 import React from 'react'
-import { View, Text, Image, StyleSheet, ScrollView } from 'react-native'
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  ScrollView,
+  FlatList,
+} from 'react-native'
 import { Link } from 'expo-router'
 import { gql, useQuery } from '@apollo/client'
 import Loader from '@/components/Loader'
+import Transits from '@/components/Transits'
 import Markdown from 'react-native-markdown-display'
 import { card } from '@/constants/Styles'
 import FitImage from 'react-native-fit-image'
@@ -25,6 +33,16 @@ const QUERY_TODAY_POST = gql`
         body
         heroImage {
           url
+        }
+        transitCollection {
+          items {
+            title
+            planet
+            sign
+            aspect
+            transitingPlanet
+            transitingSign
+          }
         }
       }
     }
@@ -78,22 +96,20 @@ const Today = () => {
             <View>
               {post.heroImage && (
                 <Image
-                  style={{ width: 300, height: 300 }}
+                  style={{ width: 300, height: 300, alignSelf: 'center' }}
                   source={{ uri: post.heroImage.url }}
                 />
               )}
               <Link href={`/${post.slug}`} style={styles.title}>
                 {post.title}
               </Link>
-              <Text style={styles.text}>{date}</Text>
+              {/* <Text style={styles.text}>{date}</Text> */}
+              <Transits transits={post.transitCollection.items} />
               <View style={card}>
                 <Markdown rules={rules} style={styles}>
-                  {post.description}
+                  {post.body}
                 </Markdown>
               </View>
-              <Markdown rules={rules} style={styles}>
-                {post.body}
-              </Markdown>
             </View>
           )}
         </View>
@@ -119,6 +135,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
+    alignSelf: 'center',
   },
   strong: { fontFamily: 'NimbusBold' },
   bullet_list: { fontFamily: 'NimbusItalic' },
