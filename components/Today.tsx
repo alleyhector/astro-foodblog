@@ -4,6 +4,8 @@ import { Link } from 'expo-router'
 import { gql, useQuery } from '@apollo/client'
 import Loader from '@/components/Loader'
 import Markdown from 'react-native-markdown-display'
+import { card } from '@/constants/Styles'
+import FitImage from 'react-native-fit-image'
 
 const QUERY_TODAY_POST = gql`
   query blogPost($today: DateTime!) {
@@ -28,6 +30,23 @@ const QUERY_TODAY_POST = gql`
     }
   }
 `
+const rules = {
+  image: (node, styles) => {
+    const { src, alt } = node.attributes
+
+    const imageProps = {
+      indicator: true,
+      key: node.key,
+      style: styles._VIEW_SAFE_image,
+      source: {
+        uri: `https:${src}`,
+        alt,
+      },
+    }
+
+    return <FitImage {...imageProps} />
+  },
+}
 
 const Today = () => {
   const today = new Date().toString()
@@ -67,8 +86,14 @@ const Today = () => {
                 {post.title}
               </Link>
               <Text style={styles.text}>{date}</Text>
-              <Markdown style={styles}>{post.description}</Markdown>
-              <Markdown>{post.body}</Markdown>
+              <View style={card}>
+                <Markdown rules={rules} style={styles}>
+                  {post.description}
+                </Markdown>
+              </View>
+              <Markdown rules={rules} style={styles}>
+                {post.body}
+              </Markdown>
             </View>
           )}
         </View>
@@ -84,19 +109,17 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 24,
   },
-  bullet_list: {
-    color: 'green',
-  },
-  list_item: {
-    fontSize: 20,
-    margin: 5,
-  },
   text: {
     fontSize: 16,
     margin: 10,
+  },
+  paragraph: {
+    fontFamily: 'Nimbus',
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
   },
+  strong: { fontFamily: 'NimbusBold' },
+  bullet_list: { fontFamily: 'NimbusItalic' },
 })
