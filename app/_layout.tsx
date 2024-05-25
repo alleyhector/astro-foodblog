@@ -38,7 +38,7 @@ SplashScreen.preventAutoHideAsync()
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+    Courier: require('../assets/fonts/SpaceMono-Regular.ttf'),
     Nimbus: require('../assets/fonts/Nimbus/NimbusSans-Regular.ttf'),
     NimbusBold: require('../assets/fonts/Nimbus/NimbusSans-Bold.ttf'),
     NimbusItalic: require('../assets/fonts/Nimbus/NimbusSans-Italic.ttf'),

@@ -1,12 +1,5 @@
 import React from 'react'
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  ScrollView,
-  FlatList,
-} from 'react-native'
+import { View, Image, StyleSheet } from 'react-native'
 import { Link } from 'expo-router'
 import { gql, useQuery } from '@apollo/client'
 import Loader from '@/components/Loader'
