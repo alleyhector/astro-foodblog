@@ -2,20 +2,25 @@ import { ImageBackground, ScrollView, StyleSheet } from 'react-native'
 import { Text, View } from '@/components/Themed'
 import Today from '@/components/Today'
 import Tomorrow from '@/components/Tomorrow'
+import { LinearGradient } from 'expo-linear-gradient'
+import { textShadow } from '@/constants/Styles'
 
 export default function HomeScreen() {
   return (
     <ScrollView>
       <View style={styles.container}>
-        <Text style={styles.text}>WITH A SIDE OF ASTRO: </Text>
-        <Text style={styles.text}>FOOD FOR CELESTIAL THOUGHT</Text>
-
+        {/* <LinearGradient colors={['#d7dddd', '#fac7b0']}> */}
+        {/* 
+        <ImageBackground
+          source={require('../../assets/images/nebula.jpg')}
+          style={styles.bgimage}
+        > */}
+        <Text style={styles.title}>With a Side of Stars </Text>
+        <Text style={styles.subtitle}>Food for celestial thought</Text>
         <Today />
         <Tomorrow />
-        {/* <ImageBackground
-          source={require('../../assets/images/icon.png')}
-          style={styles.bgimage}
-        ></ImageBackground> */}
+        {/* </ImageBackground> */}
+        {/* </LinearGradient> */}
       </View>
     </ScrollView>
   )
@@ -24,24 +29,25 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
     fontFamily: 'Nimbus',
   },
   bgimage: {
     justifyContent: 'flex-end',
-    paddingBottom: 100,
-    margin: 0,
-    padding: 0,
+    resizeMode: 'cover',
   },
   title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  text: {
-    fontSize: 24,
     fontFamily: 'AngelClub',
+    fontSize: 24,
     margin: 10,
     textAlign: 'center',
+    ...textShadow,
+  },
+  subtitle: {
+    fontFamily: 'AngelClub',
+    fontSize: 22,
+    margin: 10,
+    textAlign: 'center',
+    ...textShadow,
   },
   separator: {
     marginVertical: 30,

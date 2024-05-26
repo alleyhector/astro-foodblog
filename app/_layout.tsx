@@ -7,10 +7,11 @@ import {
 import { useFonts } from 'expo-font'
 import { Stack } from 'expo-router'
 import * as SplashScreen from 'expo-splash-screen'
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 import Loader from '@/components/Loader'
 import { useColorScheme } from '@/components/useColorScheme'
+import * as SystemUI from 'expo-system-ui'
 
 const cache = new InMemoryCache()
 

@@ -1,8 +1,10 @@
 import React from 'react'
-import { View, Text, Image, StyleSheet, ScrollView } from 'react-native'
+import { Image, StyleSheet, ScrollView } from 'react-native'
+import { Text, View, useThemeColor } from '@/components/Themed'
 import { gql, useQuery } from '@apollo/client'
 import Loader from '@/components/Loader'
 import Markdown from 'react-native-markdown-display'
+import Transits from '@/components/Transits'
 
 const QUERY_TOMORROW_POST = gql`
   query blogPost($tomorrow: DateTime!) {
@@ -14,14 +16,16 @@ const QUERY_TOMORROW_POST = gql`
       items {
         title
         slug
-        author {
-          name
-        }
         publishDate
-        description
-        body
-        heroImage {
-          url
+        transitCollection {
+          items {
+            title
+            planet
+            sign
+            aspect
+            transitingPlanet
+            transitingSign
+          }
         }
       }
     }
@@ -62,7 +66,8 @@ const Tomorrow = () => {
         <Loader />
       ) : (
         <View>
-          {post && <Markdown style={styles}>{post.description}</Markdown>}
+          <Text style={styles.menu}>On tomorrow's astrological menu: </Text>
+          <Transits transits={post.transitCollection.items} />
         </View>
       )}
     </View>
@@ -76,19 +81,9 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 24,
   },
-  bullet_list: {
-    color: 'green',
-  },
-  list_item: {
+  menu: {
+    fontFamily: 'AngelClub',
     fontSize: 20,
-    margin: 5,
-  },
-  text: {
-    fontSize: 16,
     margin: 10,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
   },
 })

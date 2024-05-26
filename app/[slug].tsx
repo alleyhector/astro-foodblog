@@ -1,9 +1,10 @@
 import React from 'react'
-import { View, Text, Image, StyleSheet, ScrollView } from 'react-native'
+import { Image, StyleSheet, ScrollView } from 'react-native'
 import { useGlobalSearchParams, useLocalSearchParams } from 'expo-router'
 import { gql, useQuery } from '@apollo/client'
 import Loader from '@/components/Loader'
 import Markdown from 'react-native-markdown-display'
+import { Text, View, useThemeColor } from '@/components/Themed'
 
 const QUERY_POST = gql`
   query blogPost($slug: String) {

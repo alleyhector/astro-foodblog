@@ -1,10 +1,9 @@
-import React from 'react'
 import { Image, StyleSheet, ScrollView } from 'react-native'
+import { Text, View, useThemeColor } from '@/components/Themed'
 import { gql, useQuery } from '@apollo/client'
 import Loader from '@/components/Loader'
 import Markdown from 'react-native-markdown-display'
 import EditScreenInfo from '@/components/EditScreenInfo'
-import { Text, View } from '@/components/Themed'
 
 const QUERY_ABOUT = gql`
   {

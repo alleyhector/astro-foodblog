@@ -1,12 +1,12 @@
-import React from 'react'
-import { View, Image, StyleSheet } from 'react-native'
+import { Image, StyleSheet } from 'react-native'
+import { Text, View, useThemeColor } from '@/components/Themed'
 import { Link } from 'expo-router'
 import { gql, useQuery } from '@apollo/client'
 import Loader from '@/components/Loader'
 import Transits from '@/components/Transits'
 import Markdown from 'react-native-markdown-display'
-import { card } from '@/constants/Styles'
 import FitImage from 'react-native-fit-image'
+import { textShadow, markdownStyles } from '@/constants/Styles'
 
 const QUERY_TODAY_POST = gql`
   query blogPost($today: DateTime!) {
@@ -89,7 +89,7 @@ const Today = () => {
             <View>
               {post.heroImage && (
                 <Image
-                  style={{ width: 300, height: 300, alignSelf: 'center' }}
+                  style={styles.hero}
                   source={{ uri: post.heroImage.url }}
                 />
               )}
@@ -97,12 +97,11 @@ const Today = () => {
                 {post.title}
               </Link>
               {/* <Text style={styles.text}>{date}</Text> */}
+              <Text style={styles.menu}>On today's astrological menu:</Text>
               <Transits transits={post.transitCollection.items} />
-              <View style={card}>
-                <Markdown rules={rules} style={styles}>
-                  {post.body}
-                </Markdown>
-              </View>
+              <Markdown rules={rules} style={markdownStyles}>
+                {post.body}
+              </Markdown>
             </View>
           )}
         </View>
@@ -116,20 +115,23 @@ export default Today
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 24,
+    padding: 20,
   },
-  text: {
-    fontSize: 16,
-    margin: 10,
-  },
-  paragraph: {
-    fontFamily: 'Nimbus',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
+  hero: {
+    width: 300,
+    height: 300,
+    resizeMode: 'contain',
     alignSelf: 'center',
   },
-  strong: { fontFamily: 'NimbusBold' },
-  bullet_list: { fontFamily: 'NimbusItalic' },
+  menu: {
+    fontFamily: 'AngelClub',
+    fontSize: 20,
+    margin: 10,
+  },
+  title: {
+    fontFamily: 'AngelClub',
+    alignSelf: 'flex-end',
+    fontSize: 24,
+    margin: 10,
+  },
 })

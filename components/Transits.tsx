@@ -1,5 +1,5 @@
-import { Image, ImageSourcePropType, StyleSheet, Text } from 'react-native'
-import { View } from './Themed'
+import { Image, ImageSourcePropType, StyleSheet } from 'react-native'
+import { Text, View, useThemeColor } from '@/components/Themed'
 import { imagesMap } from '@/assets/glyphs/exports'
 import { card } from '@/constants/Styles'
 
@@ -13,7 +13,7 @@ export default function Transits({ transits }) {
               {transit.aspect === 'ingress' ? (
                 <Text>{`${transit.planet} enters ${transit.sign}`}</Text>
               ) : (
-                <Text>
+                <Text style={styles.transitText}>
                   {`${transit.planet} in ${transit.sign} `}
                   {transit.transitingPlanet &&
                     `${transit?.aspect} ${transit?.transitingPlanet} in ${transit?.transitingSign}`}
@@ -67,15 +67,23 @@ export default function Transits({ transits }) {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
     flexDirection: 'row',
-    alignContent: 'flex-start',
     backgroundColor: 'transparent',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  transitText: {
+    marginTop: 5,
+    marginBottom: 15,
+    fontFamily: 'NimbusBold',
+    fontSize: 16,
+    textAlign: 'center',
   },
   image: {
+    width: 40,
+    height: 40,
     resizeMode: 'contain',
     flex: 1,
-    margin: -10,
     backgroundColor: 'transparent',
   },
 })
