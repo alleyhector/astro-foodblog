@@ -1,12 +1,13 @@
 import { Image, StyleSheet } from 'react-native'
-import { Text, View, useThemeColor } from '@/components/Themed'
+import { Text, View } from '@/components/Themed'
 import { Link } from 'expo-router'
 import { gql, useQuery } from '@apollo/client'
 import Loader from '@/components/Loader'
 import Transits from '@/components/Transits'
 import Markdown from 'react-native-markdown-display'
 import FitImage from 'react-native-fit-image'
-import { textShadow, markdownStyles } from '@/constants/Styles'
+import { markdownStyles } from '@/constants/Styles'
+import { LinearGradient } from 'expo-linear-gradient'
 
 const QUERY_TODAY_POST = gql`
   query blogPost($today: DateTime!) {
@@ -115,7 +116,6 @@ export default Today
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
   },
   hero: {
     width: 300,

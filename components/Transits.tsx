@@ -1,5 +1,5 @@
 import { Image, ImageSourcePropType, StyleSheet } from 'react-native'
-import { Text, View, useThemeColor } from '@/components/Themed'
+import { Text, View } from '@/components/Themed'
 import { imagesMap } from '@/assets/glyphs/exports'
 import { card } from '@/constants/Styles'
 

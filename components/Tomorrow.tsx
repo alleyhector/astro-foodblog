@@ -79,11 +79,10 @@ export default Tomorrow
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 24,
   },
   menu: {
+    marginVertical: 20,
     fontFamily: 'AngelClub',
     fontSize: 20,
-    margin: 10,
   },
 })

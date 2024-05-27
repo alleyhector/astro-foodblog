@@ -5,6 +5,8 @@ import { gql, useQuery } from '@apollo/client'
 import Loader from '@/components/Loader'
 import Markdown from 'react-native-markdown-display'
 import { Text, View, useThemeColor } from '@/components/Themed'
+import Transits from '@/components/Transits'
+import { markdownStyles } from '@/constants/Styles'
 
 const QUERY_POST = gql`
   query blogPost($slug: String) {
@@ -16,17 +18,26 @@ const QUERY_POST = gql`
           name
         }
         publishDate
-        description
         body
         heroImage {
           url
+        }
+        transitCollection {
+          items {
+            title
+            planet
+            sign
+            aspect
+            transitingPlanet
+            transitingSign
+          }
         }
       }
     }
   }
 `
 
-const PostDetails = () => {
+export default function PostDetails() {
   const { slug } = useLocalSearchParams()
 
   const { data, loading, refetch } = useQuery(QUERY_POST, {
@@ -39,45 +50,43 @@ const PostDetails = () => {
   }
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView>
       {loading ? (
         <Loader />
       ) : (
         <View style={styles.container}>
           {post.heroImage && (
-            <Image
-              style={{ width: 300, height: 300 }}
-              source={{ uri: post.heroImage.url }}
-            />
+            <Image style={styles.hero} source={{ uri: post.heroImage.url }} />
           )}
-          <Markdown style={styles}>
-            {post?.description ? post.description : ''}
-          </Markdown>
-          <Markdown>{post?.body ? post.body : ''}</Markdown>
+          <Text style={styles.menu}>On the astrological menu:</Text>
+          <Transits transits={post.transitCollection.items} />
+          <Markdown style={markdownStyles}>{post?.body}</Markdown>
         </View>
       )}
     </ScrollView>
   )
 }
 
-export default PostDetails
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
+    padding: 20,
   },
-  main: {
-    flex: 1,
-    justifyContent: 'center',
-    marginHorizontal: 'auto',
+  hero: {
+    width: 300,
+    height: 300,
+    resizeMode: 'contain',
+    alignSelf: 'center',
   },
-  text: {
-    fontSize: 18,
+  menu: {
+    fontFamily: 'AngelClub',
+    fontSize: 20,
     margin: 10,
   },
   title: {
+    fontFamily: 'AngelClub',
+    alignSelf: 'flex-end',
     fontSize: 24,
-    fontWeight: 'bold',
+    margin: 10,
   },
 })

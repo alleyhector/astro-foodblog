@@ -3,7 +3,8 @@ import { Text, View, useThemeColor } from '@/components/Themed'
 import { gql, useQuery } from '@apollo/client'
 import Loader from '@/components/Loader'
 import Markdown from 'react-native-markdown-display'
-import EditScreenInfo from '@/components/EditScreenInfo'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { dropShadow } from '@/constants/Styles'
 
 const QUERY_ABOUT = gql`
   {
@@ -21,35 +22,59 @@ const QUERY_ABOUT = gql`
 `
 
 export default function AboutScreen() {
+  const insets = useSafeAreaInsets()
   const { data, loading, refetch } = useQuery(QUERY_ABOUT, {
     fetchPolicy: 'no-cache',
   })
 
-  const about = data?.aboutCollection?.items[0]
+  let about
+  if (!loading) {
+    about = data?.aboutCollection?.items[0]
+  }
 
   return (
-    <ScrollView>
-      {about && (
-        <View style={styles.container}>
-          {about.profile && (
-            <Image
-              style={{ width: 300, height: 300 }}
-              source={{ uri: about.profile.url }}
-            />
-          )}
-          <Text style={styles.title}>{about.title}</Text>
-          <Markdown style={styles}>{about.aboutMe}</Markdown>
-        </View>
-      )}
-    </ScrollView>
+    <View
+      style={{
+        paddingTop: insets.top,
+        backgroundColor: '#fff',
+      }}
+    >
+      <ScrollView>
+        {loading ? (
+          <Loader />
+        ) : (
+          <View style={styles.container}>
+            {about && (
+              <>
+                {about.profile && (
+                  <Image
+                    style={styles.hero}
+                    source={{ uri: about.profile.url }}
+                  />
+                )}
+                <Text style={styles.title}>{about.title}</Text>
+                <Markdown style={styles}>{about.aboutMe}</Markdown>
+              </>
+            )}
+          </View>
+        )}
+      </ScrollView>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    fontFamily: 'Nimbus',
+    padding: 20,
+  },
+  hero: {
+    marginTop: 20,
+    width: 260,
+    height: 387,
+    resizeMode: 'contain',
+    alignSelf: 'center',
   },
   title: {
     fontSize: 20,
