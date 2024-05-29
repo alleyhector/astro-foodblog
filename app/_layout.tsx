@@ -13,6 +13,7 @@ import Loader from '@/components/Loader'
 import { useColorScheme } from '@/components/useColorScheme'
 import * as SystemUI from 'expo-system-ui'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
+import Colors from '@/constants/Colors'
 
 const cache = new InMemoryCache()
 
@@ -74,7 +75,14 @@ function RootLayoutNav() {
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <ApolloProvider client={client}>
         <SafeAreaProvider>
-          <Stack>
+          <Stack
+            screenOptions={{
+              headerStyle: {
+                backgroundColor: Colors[colorScheme].background,
+              },
+              headerTintColor: Colors[colorScheme].tint,
+            }}
+          >
             <Stack.Screen
               name='(tabs)'
               options={{ headerShown: false, title: 'Back' }}

@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Side of Astro",
+    "name": "Side of Stars",
     "slug": "foodblog",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -12,24 +12,38 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.alleyhector1981.foodblog"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.alleyhector1981.foodblog"
     },
     "web": {
       "bundler": "metro",
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
-    "plugins": ["expo-router"],
+    "plugins": [
+      "expo-router"
+    ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "aab4aac2-3380-4578-a4ef-5854f5d9f17e"
+      }
     }
   }
 }

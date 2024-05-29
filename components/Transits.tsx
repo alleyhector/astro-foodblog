@@ -11,7 +11,9 @@ export default function Transits({ transits }) {
           return (
             <View style={card} key={index}>
               {transit.aspect === 'ingress' ? (
-                <Text>{`${transit.planet} enters ${transit.sign}`}</Text>
+                <Text
+                  style={styles.transitText}
+                >{`${transit.planet} enters ${transit.sign}`}</Text>
               ) : (
                 <Text style={styles.transitText}>
                   {`${transit.planet} in ${transit.sign} `}

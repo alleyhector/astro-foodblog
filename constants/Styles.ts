@@ -13,8 +13,7 @@ export const dropShadow = {
 }
 
 export const textShadow = {
-  textShadowColor:
-    Platform.OS == 'android' ? 'rgb(0, 0, 0)' : 'rgba(42, 42, 43, 0.2)',
+  textShadowColor: 'rgba(42, 42, 43, 0.2)',
   textShadowOffset: {
     width: -4,
     height: 4,

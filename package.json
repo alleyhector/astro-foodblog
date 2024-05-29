@@ -1,5 +1,5 @@
 {
-  "name": "my-app",
+  "name": "foodblog",
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
@@ -15,10 +15,11 @@
   "dependencies": {
     "@apollo/client": "^3.10.3",
     "@expo/vector-icons": "^14.0.0",
-    "@react-native-async-storage/async-storage": "^1.23.1",
+    "@react-native-async-storage/async-storage": "1.21.0",
     "@react-navigation/native": "^6.0.2",
     "apollo3-cache-persist": "^0.15.0",
-    "expo": "~50.0.14",
+    "expo": "~50.0.19",
+    "expo-dev-client": "~3.3.12",
     "expo-font": "~11.10.3",
     "expo-linear-gradient": "~12.7.2",
     "expo-linking": "~6.2.2",
