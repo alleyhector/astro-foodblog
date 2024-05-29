@@ -11,55 +11,106 @@ export default function Transits({ transits }) {
           return (
             <View style={card} key={index}>
               {transit.aspect === 'ingress' ? (
-                <Text
-                  style={styles.transitText}
-                >{`${transit.planet} enters ${transit.sign}`}</Text>
-              ) : (
-                <Text style={styles.transitText}>
-                  {`${transit.planet} in ${transit.sign} `}
-                  {transit.transitingPlanet &&
-                    `${transit?.aspect} ${transit?.transitingPlanet} in ${transit?.transitingSign}`}
-                </Text>
-              )}
+                <>
+                  <Text
+                    style={styles.transitText}
+                  >{`${transit.planet} enters ${transit.sign}`}</Text>
 
-              <View style={styles.container}>
-                <Image
-                  style={styles.image}
-                  source={
-                    imagesMap[
-                      transit?.planet !== 'New Moon' || 'Full Moon'
-                        ? transit?.planet
-                        : 'Moon'
-                    ] as ImageSourcePropType
-                  }
-                />
-                <Image
-                  style={styles.image}
-                  source={imagesMap[transit?.sign ?? ''] as ImageSourcePropType}
-                />
-                <Image
-                  style={styles.image}
-                  source={
-                    imagesMap[transit?.aspect ?? ''] as ImageSourcePropType
-                  }
-                />
-                <Image
-                  style={styles.image}
-                  source={
-                    imagesMap[
-                      transit?.transitingPlanet ?? ''
-                    ] as ImageSourcePropType
-                  }
-                />
-                <Image
-                  style={styles.image}
-                  source={
-                    imagesMap[
-                      transit?.transitingSign ?? ''
-                    ] as ImageSourcePropType
-                  }
-                />
-              </View>
+                  <View style={styles.container}>
+                    <Image
+                      style={styles.image}
+                      source={
+                        imagesMap[transit?.planet ?? ''] as ImageSourcePropType
+                      }
+                    />
+
+                    <Image
+                      style={styles.image}
+                      source={
+                        imagesMap[transit?.aspect ?? ''] as ImageSourcePropType
+                      }
+                    />
+                    <Image
+                      style={styles.image}
+                      source={
+                        imagesMap[transit?.sign ?? ''] as ImageSourcePropType
+                      }
+                    />
+                  </View>
+                </>
+              ) : (
+                <>
+                  <Text style={styles.transitText}>
+                    {`${transit.planet} in ${transit.sign} `}
+                    {transit.transitingPlanet &&
+                      `${transit?.aspect} ${transit?.transitingPlanet} in ${transit?.transitingSign}`}
+                  </Text>
+
+                  <View style={styles.container}>
+                    {transit?.planet === 'New Moon' ||
+                    transit?.planet === 'Full Moon' ? (
+                      <>
+                        <Image
+                          style={styles.image}
+                          source={imagesMap['Moon'] as ImageSourcePropType}
+                        />
+                        <Image
+                          style={styles.image}
+                          source={
+                            imagesMap[
+                              transit?.sign ?? ''
+                            ] as ImageSourcePropType
+                          }
+                        />
+                      </>
+                    ) : (
+                      <>
+                        <Image
+                          style={styles.image}
+                          source={
+                            imagesMap[
+                              transit?.planet ?? ''
+                            ] as ImageSourcePropType
+                          }
+                        />
+
+                        <Image
+                          style={styles.image}
+                          source={
+                            imagesMap[
+                              transit?.sign ?? ''
+                            ] as ImageSourcePropType
+                          }
+                        />
+                        <Image
+                          style={styles.image}
+                          source={
+                            imagesMap[
+                              transit?.aspect ?? ''
+                            ] as ImageSourcePropType
+                          }
+                        />
+                        <Image
+                          style={styles.image}
+                          source={
+                            imagesMap[
+                              transit?.transitingPlanet ?? ''
+                            ] as ImageSourcePropType
+                          }
+                        />
+                        <Image
+                          style={styles.image}
+                          source={
+                            imagesMap[
+                              transit?.transitingSign ?? ''
+                            ] as ImageSourcePropType
+                          }
+                        />
+                      </>
+                    )}
+                  </View>
+                </>
+              )}
             </View>
           )
         })}
