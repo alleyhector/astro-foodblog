@@ -15,6 +15,21 @@ web-build/
 *.p12
 *.key
 *.mobileprovision
+android/*
+ios/*
+
+# CocoaPods
+/ios/Pods/
+
+# Android/IntelliJ
+#
+build/
+.idea
+.gradle
+local.properties
+*.iml
+*.hprof
+.cxx/
 
 # Metro
 .metro-health-check*
